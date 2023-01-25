@@ -23,9 +23,9 @@ variable "ami" {
     default = "ami-035e90af11365cc27"
 }
 
-variable "key_name" {
+variable "SSH_PRIVATE_KEY" {
     type = string
-    default = "terraform_ec2_key"
+    default = "SSH_PRIVATE_KEY"
 }
 
 variable "connection_user" {

@@ -15,7 +15,7 @@ resource "aws_instance" "diplom" {
   ami           = var.ami
   instance_type = var.instance_type
   associate_public_ip_address = true
-  key_name      = var.key_name
+  key_name      = var.SSH_PRIVATE_KEY
   vpc_security_group_ids = [resource.aws_security_group.web.id]  
 ### Run commands  
   # provisioner "remote-exec" {
@@ -35,11 +35,11 @@ resource "aws_instance" "diplom" {
     owner = "Dmitry Yankov"
     }
   }
-### Add SSH-key
-resource "aws_key_pair" "terraform_ec2_key" {
-	key_name = var.key_name
-	public_key = "${file("terraform_ec2_key.pub")}"
-}
+# ### Add SSH-key
+# resource "aws_key_pair" "terraform_ec2_key" {
+# 	key_name = var.key_name
+# 	public_key = "${file("terraform_ec2_key.pub")}"
+# }
 
 ### Create security group
 resource "aws_security_group" "web" {
