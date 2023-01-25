@@ -35,11 +35,10 @@ resource "aws_instance" "diplom" {
     owner = "Dmitry Yankov"
     }
   }
-# ### Add SSH-key
-# resource "aws_key_pair" "terraform_ec2_key" {
-# 	key_name = var.key_name
-# 	public_key = "${file("terraform_ec2_key.pub")}"
-# }
+### Add SSH-key
+resource "aws_key_pair" "terraform_ec2_key" {
+	key_name = var.key_name
+}
 
 ### Create security group
 resource "aws_security_group" "web" {
