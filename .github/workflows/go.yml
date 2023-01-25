@@ -5,10 +5,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-stages:
-  - test
-  - build
-  - deploy
+# stages:
+#   - test
+#   - build
+#   - deploy
 
 jobs:
 
