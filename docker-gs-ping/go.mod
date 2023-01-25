@@ -1,4 +1,4 @@
-module github.com/olliefr/docker-gs-ping
+module github.com/DmitryYankov/diplom
 
 go 1.16
 

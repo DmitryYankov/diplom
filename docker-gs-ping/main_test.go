@@ -42,7 +42,7 @@ func TestRespondsWithLove(t *testing.T) {
 	var resp *http.Response
 
 	err = pool.Retry(func() error {
-		resp, err = http.Get(fmt.Sprint("http://localhost:", resource.GetPort("8080/tcp"), "/"))
+		resp, err = http.Get(fmt.Sprint("http://localhost:", resource.GetPort("8081/tcp"), "/"))
 		if err != nil {
 			t.Log("container not ready, waiting...")
 			return err
@@ -78,7 +78,7 @@ func TestHealthCheck(t *testing.T) {
 	var resp *http.Response
 
 	err = pool.Retry(func() error {
-		resp, err = http.Get(fmt.Sprint("http://localhost:", resource.GetPort("8080/tcp"), "/ping"))
+		resp, err = http.Get(fmt.Sprint("http://localhost:", resource.GetPort("8081/tcp"), "/ping"))
 		if err != nil {
 			t.Log("container not ready, waiting...")
 			return err
