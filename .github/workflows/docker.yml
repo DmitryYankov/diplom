@@ -15,5 +15,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        docker build -t docker-gs-ping -f Dockerfile ./docker-gs-ping/
+        docker build ./docker-gs-ping/ -t docker-gs-ping -f Dockerfile 
         go test -v ./docker-gs-ping/main_test.go
