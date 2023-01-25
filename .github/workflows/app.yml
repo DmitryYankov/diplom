@@ -20,10 +20,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # - name: Fetch required Go modules
-      #   run:  go mod download
-      # - name: Build
-      #   run:  go build -v ./docker-gs-ping/...
+      - name: Fetch required Go modules
+        run:  go mod init
+      - name: Build
+        run:  go build -v ./docker-gs-ping/...
   
       - name: Set up Docker Buildx
         id:   buildx
