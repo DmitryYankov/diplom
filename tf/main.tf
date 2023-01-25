@@ -46,7 +46,6 @@ resource "aws_security_group" "web" {
   name        = "web"
   description = "web"
   
-
   ingress {
     description = "ssh"
     from_port   = 22
