@@ -45,6 +45,7 @@ resource "aws_key_pair" "terraform_ec2_key" {
 resource "aws_security_group" "web" {
   name        = "web"
   description = "web"
+  
 
   ingress {
     description = "ssh"
