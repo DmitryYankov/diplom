@@ -28,7 +28,6 @@ resource "aws_instance" "diplom" {
   #   private_key = "${file("terraform_ec2_key")}"
   # }
   # }
-
   tags =  {
     name = "ubuntu server"
     description = "created by terraform"
