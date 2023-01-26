@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 env:
   path: tf
+  
 jobs:
   golangci:
     name: lint
@@ -38,8 +39,8 @@ jobs:
     steps:
       - name: Docker login
         env:
-          DOCKER_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          DOCKER_USER: ${{ DOCKERHUB_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: build docker image
@@ -47,7 +48,7 @@ jobs:
           cd ./docker-gs-ping
           docker build -t docker-gs-ping -f Dockerfile .
       - name: docker push
-        run: docker push ${{secrets.DOCKER_HUB_USERNAME}}/dockerhubdiplom  
+        run: docker push ${{secrets.DOCKERHUB_USERNAME}}/dockerhubdiplom  
         
   # terraform-init-plan:
   #   name: 'Terraform'
