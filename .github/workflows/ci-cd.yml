@@ -49,8 +49,9 @@ jobs:
         run: |
           cd ./docker-gs-ping/
           docker build -t docker-gs-ping -f Dockerfile .
+          docker tag docker-gs-ping:latest ${{secrets.DOCKERHUB_USERNAME}}/devops:latest
       - name: docker push
-        run: docker push ${{secrets.DOCKERHUB_USERNAME}}/devops 
+        run: docker push docker-gs-ping:latest ${{secrets.DOCKERHUB_USERNAME}}/devops
         
   # terraform-init-plan:
   #   name: 'Terraform'
