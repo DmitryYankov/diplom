@@ -34,43 +34,43 @@ jobs:
         docker build -t docker-gs-ping:latest .
         go test -v main_test.go
   
-  terraform:
-    name: 'Terraform'
-    runs-on: ubuntu-latest
+  # terraform:
+  #   name: 'Terraform'
+  #   runs-on: ubuntu-latest
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
+  #   # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+  #   defaults:
+  #     run:
+  #       shell: bash
 
-    steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
+  #   steps:
+  #   # Checkout the repository to the GitHub Actions runner
+  #   - name: Checkout
+  #     uses: actions/checkout@v3
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
+  #   # Checks that all Terraform configuration files adhere to a canonical format
+  #   - name: Terraform Format
+  #     run: terraform fmt -check
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        cd $path/
-        terraform init -input=false
-        terraform plan 
+  #   # Generates an execution plan for Terraform
+  #   - name: Terraform Plan
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     run: |
+  #       cd $path/
+  #       terraform init -input=false
+  #       terraform plan 
 
-      # On push to "master", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      # if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
-      run: |
-        cd $path/
-        terraform init -input=false
-        terraform apply -auto-approve 
+  #     # On push to "master", build or change infrastructure according to Terraform configuration files
+  #     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+  #   - name: Terraform Apply
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     # if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
+  #     run: |
+  #       cd $path/
+  #       terraform init -input=false
+  #       terraform apply -auto-approve 
     
