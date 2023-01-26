@@ -50,7 +50,7 @@ jobs:
           cd ./docker-gs-ping/
           docker build -t docker-gs-ping -f Dockerfile .
       - name: docker push
-        run: docker push ${{secrets.DOCKERHUB_USERNAME}}/dockerhubdiplom  
+        run: docker push ${{secrets.DOCKERHUB_USERNAME}}/devops 
         
   # terraform-init-plan:
   #   name: 'Terraform'
