@@ -44,9 +44,7 @@ jobs:
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: build docker image
-        run: |
-          cd ./docker-gs-ping
-          docker build -t docker-gs-ping -f Dockerfile .
+        run: docker build -t docker-gs-ping -f Dockerfile ./docker-gs-ping/
       - name: docker push
         run: docker push ${{secrets.DOCKERHUB_USERNAME}}/dockerhubdiplom  
         
