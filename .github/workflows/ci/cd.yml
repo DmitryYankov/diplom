@@ -34,7 +34,7 @@ jobs:
         docker build -t docker-gs-ping:latest .
         go test -v main_test.go
   
-  # terraform:
+  # terraform-init-plan:
   #   name: 'Terraform'
   #   runs-on: ubuntu-latest
 
@@ -62,6 +62,15 @@ jobs:
   #       terraform init -input=false
   #       terraform plan 
 
+  # terraform-apply:
+  #   runs-on: ubuntu-latest
+
+  #   # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+  #   defaults:
+  #     run:
+  #       shell: bash
+
+  #   steps:
   #     # On push to "master", build or change infrastructure according to Terraform configuration files
   #     # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
   #   - name: Terraform Apply
