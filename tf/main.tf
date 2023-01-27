@@ -18,6 +18,11 @@ resource "aws_instance" "diplom" {
   key_name      = var.SSH_PRIVATE_KEY
   vpc_security_group_ids = [resource.aws_security_group.web.id]  
 
+  tags =  {
+    Name = var.vmname
+    description = "created by terraform"
+    owner = "Dmitry Yankov"
+    }
   }
 
 ### Create security group
