@@ -133,7 +133,7 @@ jobs:
       run: |
         cd ./ansible/
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -i aws_ec2.yml --private-key ${secrets.SSH_PRIVATE_KEY} playbook.yml      
+        ansible-playbook -i aws_ec2.yml --private-key ${{secrets.SSH_PRIVATE_KEY}} playbook.yml      
     # - name: Play Ansible Playbook
     #   uses: arillso/action.playbook@master
     #   with:
