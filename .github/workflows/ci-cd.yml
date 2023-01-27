@@ -116,7 +116,6 @@ jobs:
         cd ./tf/
         terraform init -input=false
         terraform apply -auto-approve 
-        ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml --key-file ${{ secrets.SSH_PRIVATE_KEY }}
 
   ansible:
     name: ansible
