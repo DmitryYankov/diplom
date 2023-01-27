@@ -25,11 +25,11 @@ resource "aws_instance" "diplom" {
     type = var.connection_type
     user = var.connection_user
     host = "${aws_instance.diplom.public_ip}"
-    private_key = "${file("terraform_ec2_key")}"
+    private_key = "${file("SSH_PRIVATE_KEY.pem")}"
   }
   }
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.diplom.public_ip},' --private-key ./terraform_ec2_key playbook.yml" 
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.diplom.public_ip},' --private-key ./SSH_PRIVATE_KEY.pem playbook.yml" 
   }
   tags =  {
     Name = var.vmname
