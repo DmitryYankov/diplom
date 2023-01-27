@@ -33,3 +33,13 @@ variable "SSH_PRIVATE_KEY" {
     type = string
     default = "SSH_PRIVATE_KEY"
 }
+
+variable "connection_user" {
+    type = string
+    default = "ubuntu"
+}
+
+variable "connection_type" {
+    type = string
+    default = "ssh"
+}

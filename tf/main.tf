@@ -17,7 +17,20 @@ resource "aws_instance" "diplom" {
   associate_public_ip_address = true
   key_name      = var.SSH_PRIVATE_KEY
   vpc_security_group_ids = [resource.aws_security_group.web.id]  
-
+## Run commands  
+  provisioner "remote-exec" {
+    inline = ["sudo apt update", "echo RUN PLAYBOOK!"]
+  
+  connection {
+    type = var.connection_type
+    user = var.connection_user
+    host = "${aws_instance.diplom.public_ip}"
+    private_key = "${file("terraform_ec2_key")}"
+  }
+  }
+  provisioner "local-exec" {
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u fedora -i '${self.public_ip},' --private-key ./terraform_ec2_key playbook.yml" 
+  }
   tags =  {
     Name = var.vmname
     description = "created by terraform"
