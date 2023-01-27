@@ -138,7 +138,7 @@ jobs:
       # if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml --key-file $SSH_PRIVATE_KEY        
+        ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml      
  
     # - name: run command
     #   run: export ANSIBLE_HOST_KEY_CHECKING=False
