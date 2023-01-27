@@ -29,7 +29,7 @@ resource "aws_instance" "diplom" {
 #   }
 #   }
   tags =  {
-    name = "ubuntu server"
+    name = var.vmname
     description = "created by terraform"
     owner = "Dmitry Yankov"
     }

@@ -3,6 +3,11 @@ variable "region" {
     default = "eu-central-1"
 }
 
+variable "vmname" {
+  type = string
+  description = "Tag Name for creating VM from system environments"
+}
+
 variable "network_interface_id" {
   type = string
   default = "network_id_from_aws"
@@ -26,14 +31,4 @@ variable "ami" {
 variable "SSH_PRIVATE_KEY" {
     type = string
     default = "SSH_PRIVATE_KEY"
-}
-
-variable "connection_user" {
-    type = string
-    default = "ubuntu"
-}
-
-variable "connection_type" {
-    type = string
-    default = "ssh"
 }
