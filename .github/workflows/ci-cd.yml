@@ -125,6 +125,8 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
+    - name: run command
+      run: export ANSIBLE_HOST_KEY_CHECKING=False
     - name: Run Ansible playbook
       uses: dawidd6/action-ansible-playbook@v2.6.1
       with:
