@@ -123,31 +123,31 @@ jobs:
     needs: terraform-apply
     steps:
       # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: key
-      # Make sure the @v0.7.0 matches the current version of the action
-      uses: webfactory/ssh-agent@v0.7.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}        
-    - name: Play Ansible Playbook
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml      
- 
-    # - name: run command
-    #   run: export ANSIBLE_HOST_KEY_CHECKING=False
-    # - name: Run Ansible playbook
+    # - name: Checkout
+    #   uses: actions/checkout@v3
+    # - name: key
+    #   # Make sure the @v0.7.0 matches the current version of the action
+    #   uses: webfactory/ssh-agent@v0.7.0
+    #   with:
+    #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}        
+    # - name: Play Ansible Playbook
     #   env:
+    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
     #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #   uses: dawidd6/action-ansible-playbook@v2.6.1
-    #   with:
-    #       playbook: playbook.yml # path to your Ansible playbook
-    #       directory: ./ansible/
-    #       key: ${{secrets.SSH_PRIVATE_KEY}} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
-    #       inventory: aws_ec2.yml # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
+    #   run: |
+    #     export ANSIBLE_HOST_KEY_CHECKING=False
+    #     ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml      
+ 
+    - name: run command
+      run: export ANSIBLE_HOST_KEY_CHECKING=False
+    - name: Run Ansible playbook
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      uses: DmitryYankov/test
+      with:
+          playbook: playbook.yml # path to your Ansible playbook
+          directory: ./ansible/
+          key: ${{secrets.SSH_PRIVATE_KEY}} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
+          inventory: aws_ec2.yml # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
