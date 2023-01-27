@@ -17,17 +17,17 @@ resource "aws_instance" "diplom" {
   associate_public_ip_address = true
   key_name      = var.SSH_PRIVATE_KEY
   vpc_security_group_ids = [resource.aws_security_group.web.id]  
-### Run commands  
-  provisioner "remote-exec" {
-    inline = ["sudo docker run -d -p 8081:8081 screen15/devops:latest", "echo Done!"]
+# ### Run commands  
+#   provisioner "remote-exec" {
+#     inline = ["sudo docker run -d -p 8081:8081 screen15/devops:latest", "echo Done!"]
   
-  connection {
-    type = var.connection_type
-    user = var.connection_user
-    host = "${aws_instance.diplom.public_ip}"
-    private_key = var.SSH_PRIVATE_KEY
-  }
-  }
+#   connection {
+#     type = var.connection_type
+#     user = var.connection_user
+#     host = "${aws_instance.diplom.public_ip}"
+#     private_key = var.SSH_PRIVATE_KEY
+#   }
+#   }
   tags =  {
     name = "ubuntu server"
     description = "created by terraform"

@@ -5,11 +5,15 @@ on:
     branches: [ main ]
   workflow_dispatch:
 env:
-  path: tf
-  
+  CONTAINER_NAME: devops
+  CONTAINER_IMAGE: "screen15/devops:latest"
+  TF_VAR_VMNAME: test
+  # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/tf_state
+  # TF_ROOT: ${CI_PROJECT_DIR}/infrastructure/tf/
+
 jobs:
   golangci:
-    name: lint
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v3
@@ -25,6 +29,7 @@ jobs:
           working-directory: docker-gs-ping
 
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
@@ -35,7 +40,8 @@ jobs:
         docker build -t docker-gs-ping:latest .
         go test -v main_test.go
 
-  docker:   
+  docker: 
+    name: Docker  
     runs-on: ubuntu-latest
     needs: [golangci, test]
     steps:
@@ -56,7 +62,7 @@ jobs:
         run: docker push ${{secrets.DOCKERHUB_USERNAME}}/devops
         
   terraform-init-plan:
-    name: 'Terraform'
+    name: 'Terraform plan'
     runs-on: ubuntu-latest
     needs: docker
 
@@ -80,11 +86,12 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        cd $path/
+        cd ./tf/
         terraform init -input=false
         terraform plan 
 
   terraform-apply:
+    name: 'Terraform apply'
     runs-on: ubuntu-latest
     needs: terraform-init-plan
 
@@ -106,6 +113,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       # if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
       run: |
-        cd $path/
+        cd ./tf/
         terraform init -input=false
         terraform apply -auto-approve 
+        ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml --key-file ${{ secrets.SSH_PRIVATE_KEY }}
