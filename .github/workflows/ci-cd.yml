@@ -135,7 +135,6 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      # if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
       run: |
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml      
