@@ -151,3 +151,5 @@ jobs:
           directory: ./ansible/
           key: ${{secrets.SSH_PRIVATE_KEY}} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
           inventory: aws_ec2.yml # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
+
+          
