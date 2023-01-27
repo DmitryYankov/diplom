@@ -145,7 +145,7 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      uses: DmitryYankov/test
+      uses: DmitryYankov/test@2.6.1
       with:
           playbook: playbook.yml # path to your Ansible playbook
           directory: ./ansible/
