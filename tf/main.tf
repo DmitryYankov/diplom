@@ -29,7 +29,7 @@ resource "aws_instance" "diplom" {
   }
   }
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.diplom.public_ip},' --private-key ./SSH_PRIVATE_KEY.pem playbook.yml" 
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.diplom.public_ip},' --private-key ${secrets.SSH_PRIVATE_KEY} playbook.yml" 
   }
   tags =  {
     Name = var.vmname
