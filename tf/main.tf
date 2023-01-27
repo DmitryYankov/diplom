@@ -25,7 +25,7 @@ resource "aws_instance" "diplom" {
     type = var.connection_type
     user = var.connection_user
     host = "${aws_instance.diplom.public_ip}"
-    private_key = "${file("terraform_ec2_key")}"
+    private_key = var.SSH_PRIVATE_KEY
   }
   }
   tags =  {
