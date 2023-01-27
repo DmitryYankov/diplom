@@ -17,25 +17,7 @@ resource "aws_instance" "diplom" {
   associate_public_ip_address = true
   key_name      = var.SSH_PRIVATE_KEY
   vpc_security_group_ids = [resource.aws_security_group.web.id]  
-## Run commands  
-  provisioner "remote-exec" {
-    inline = ["chmod 400 SSH_PRIVATE_KEY.pem", "echo RUN PLAYBOOK!"]
-  
-  connection {
-    type = var.connection_type
-    user = var.connection_user
-    host = "${aws_instance.diplom.public_ip}"
-    private_key = "${file("SSH_PRIVATE_KEY.pem")}"
-  }
-  }
-  provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.diplom.public_ip},' --private-key ${secrets.SSH_PRIVATE_KEY} playbook.yml" 
-  }
-  tags =  {
-    Name = var.vmname
-    description = "created by terraform"
-    owner = "Dmitry Yankov"
-    }
+
   }
 
 ### Create security group
