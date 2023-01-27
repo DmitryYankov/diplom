@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: "{{ lookup('ansible.builtin.env', 'TF_VAR_VMNAME') }}"
   become: true
   vars:
     container_name: "{{ lookup('ansible.builtin.env', 'CONTAINER_NAME') }}"     
