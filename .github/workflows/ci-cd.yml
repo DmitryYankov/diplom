@@ -125,6 +125,11 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
+    - name: key
+      # Make sure the @v0.7.0 matches the current version of the action
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}        
     - name: Play Ansible Playbook
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
