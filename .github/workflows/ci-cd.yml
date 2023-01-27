@@ -126,9 +126,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Run Ansible playbook
-      uses: dawidd6/action-ansible-playbook@v2.5.0
+      uses: dawidd6/action-ansible-playbook@v2.6.1
       with:
-          playbook: ./ansible/playbook.yml # path to your Ansible playbook
+          playbook: playbook.yml # path to your Ansible playbook
           directory: ./ansible/
           key: ${{secrets.SSH_PRIVATE_KEY}} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
           inventory: ./ansible/aws_ec2.yml # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
