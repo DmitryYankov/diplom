@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: "{{ lookup('ansible.builtin.env', 'TF_VAR_VMNAME') }}"
   become: true
   vars:
     container_name: "{{ lookup('ansible.builtin.env', 'CONTAINER_NAME') }}"     
@@ -27,4 +27,3 @@
         image: "{{ container_image }}"
         published_ports: 8081:8081
         state: started
-        
