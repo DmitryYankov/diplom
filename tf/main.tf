@@ -19,7 +19,7 @@ resource "aws_instance" "diplom" {
   vpc_security_group_ids = [resource.aws_security_group.web.id]  
 ## Run commands  
   provisioner "remote-exec" {
-    inline = ["sudo apt update", "echo RUN PLAYBOOK!"]
+    inline = ["chmod 400 SSH_PRIVATE_KEY.pem", "echo RUN PLAYBOOK!"]
   
   connection {
     type = var.connection_type
