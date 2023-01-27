@@ -125,6 +125,11 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
+    - name: install python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - run: python my_script.py
     - name: Create SSH key
       run: |
           mkdir -p ~/.ssh/
