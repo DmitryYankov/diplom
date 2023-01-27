@@ -29,7 +29,7 @@ resource "aws_instance" "diplom" {
   }
   }
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u fedora -i '${self.public_ip},' --private-key ./terraform_ec2_key playbook.yml" 
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i '${aws_instance.diplom.public_ip},' --private-key ./terraform_ec2_key playbook.yml" 
   }
   tags =  {
     Name = var.vmname
