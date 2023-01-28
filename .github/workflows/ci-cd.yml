@@ -7,9 +7,7 @@ on:
 env:
   CONTAINER_NAME: devops
   CONTAINER_IMAGE: "screen15/devops:latest"
-  TF_VAR_VMNAME: diplom
-  # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/tf_state
-  # TF_ROOT: ${CI_PROJECT_DIR}/infrastructure/tf/
+
 
 jobs:
   golangci:
