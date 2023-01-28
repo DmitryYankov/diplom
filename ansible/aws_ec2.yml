@@ -2,12 +2,12 @@ plugin: aws_ec2
 regions:
   - eu-central-1
 
-aws_access_key: "AKIA6KI5AKPRP3TTWQO4" #"{{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}" 
-aws_secret_key: "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" #"{{ lookup('ansible.builtin.env', 'AWS_SECRET_ACCESS_KEY') }}" 
+aws_access_key: "{{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}" 
+aws_secret_key: "{{ lookup('ansible.builtin.env', 'AWS_SECRET_ACCESS_KEY') }}" 
 
 hostnames:
   - 'tag:Name=diplom'
-  
+
 compose:
   ansible_host: public_dns_name
   ansible_user: "'ubuntu'"

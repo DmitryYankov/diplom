@@ -25,7 +25,7 @@ variable "instance_type" {
 
 variable "ami" {
     type = string
-    default = "ami-03e08697c325f02ab"
+    default = "ami-035e90af11365cc27"
 }
 
 variable "SSH_PRIVATE_KEY" {
