@@ -123,12 +123,6 @@ jobs:
     needs: terraform-apply
     steps:
       # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-    # - name: install python
-    #   uses: actions/setup-python@v4
-    #   with:
-    #     python-version: '3.10' 
     - name: Create SSH key
       run: |
           mkdir -p ~/.ssh/
@@ -137,7 +131,13 @@ jobs:
           ls ~/.ssh/
       shell: bash
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}       
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
+    - name: Checkout
+      uses: actions/checkout@v3
+    # - name: install python
+    #   uses: actions/setup-python@v4
+    #   with:
+    #     python-version: '3.10' 
     - name: Play Ansible Playbook
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
