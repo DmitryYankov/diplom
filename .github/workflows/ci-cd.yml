@@ -143,8 +143,9 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
+        cd ./ansible/
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook ./ansible/playbook.yml -i ./ansible/aws_ec2.yml --key-file ~/.ssh/private.key      
+        ansible-playbook playbook.yml -i aws_ec2.yml --key-file ~/.ssh/private.key      
  
     # - name: run command
     #   run: export ANSIBLE_HOST_KEY_CHECKING=False
