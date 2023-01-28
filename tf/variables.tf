@@ -6,7 +6,7 @@ variable "region" {
 variable "vmname" {
   type = string
   description = "Tag Name for creating VM from system environments"
-#   default = "diplom"
+  default = "diplom"
 }
 
 variable "network_interface_id" {
