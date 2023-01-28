@@ -159,3 +159,4 @@ jobs:
     #       inventory: aws_ec2.yml # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
 
       
+      
