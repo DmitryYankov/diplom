@@ -5,7 +5,6 @@ variable "region" {
 
 variable "vmname" {
   type = string
-  description = "Tag Name for creating VM from system environments"
   default = "diplom"
 }
 
@@ -34,12 +33,3 @@ variable "SSH_PRIVATE_KEY" {
     default = "SSH_PRIVATE_KEY"
 }
 
-variable "connection_user" {
-    type = string
-    default = "ubuntu"
-}
-
-variable "connection_type" {
-    type = string
-    default = "ssh"
-}

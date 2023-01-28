@@ -3,7 +3,7 @@ regions:
   - eu-central-1
 
 hostnames:
-  - 'tag:Name'
+  - 'tag:Name=diplom'
 compose:
   ansible_host: public_dns_name
   ansible_user: "'ubuntu'"
