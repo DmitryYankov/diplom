@@ -5,7 +5,8 @@ variable "region" {
 
 variable "vmname" {
   type = string
-  default = "diplom"
+  description = "Tag Name for creating VM from system environments"
+#   default = "diplom"
 }
 
 variable "network_interface_id" {
@@ -32,3 +33,4 @@ variable "SSH_PRIVATE_KEY" {
     type = string
     default = "SSH_PRIVATE_KEY"
 }
+

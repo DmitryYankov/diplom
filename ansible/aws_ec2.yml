@@ -6,7 +6,7 @@ aws_access_key: "{{ lookup('ansible.builtin.env', 'AWS_ACCESS_KEY_ID') }}"
 aws_secret_key: "{{ lookup('ansible.builtin.env', 'AWS_SECRET_ACCESS_KEY') }}" 
 
 hostnames:
-  - 'tag:Name=diplom'
+  - 'tag:Name'
 
 compose:
   ansible_host: public_dns_name
