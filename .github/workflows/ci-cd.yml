@@ -116,24 +116,33 @@ jobs:
     runs-on: ubuntu-latest
     needs: terraform-apply
     steps:
+    - name: Checkout
+      uses: actions/checkout@v3    
     - name: install python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'  
     - name: install boto3
       run: |
-          pip install boto3 requests pyjwt   
-      # Checkout the repository to the GitHub Actions runner
-    - name: Create SSH key
+          pip install boto3 requests pyjwt  
+    - name: Create dir
       run: |
           mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ../private.key
-          sudo chmod 600 ../private.key
+      shell: bash          
+    - name: Create SSH key
+      run: |
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/private.key 
+      shell: bash  
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}                 
+      # Checkout the repository to the GitHub Actions runner
+    - name: chmod SSH key
+      run: |
+          sudo chmod 600 ~/.ssh//private.key
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
-    - name: Checkout
-      uses: actions/checkout@v3
+
     - name: Play Ansible Playbook
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
