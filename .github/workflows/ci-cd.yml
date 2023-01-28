@@ -105,7 +105,6 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      # if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
       run: |
         cd ./tf/
         terraform init -input=false
@@ -125,7 +124,6 @@ jobs:
     - name: install boto3
       run: |
           pip install boto3 requests pyjwt   
-      # Checkout the repository to the GitHub Actions runner
     - name: Create SSH key
       run: |
           mkdir -p ~/.ssh/
@@ -143,18 +141,6 @@ jobs:
         cd ./ansible/
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-playbook playbook.yml -i aws_ec2.yml --key-file ~/.ssh/private.key      
- 
-    # - name: run command
-    #   run: export ANSIBLE_HOST_KEY_CHECKING=False
-    # - name: Run Ansible playbook
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #   uses: DmitryYankov/test@2.6.1
-    #   with:
-    #       playbook: playbook.yml # path to your Ansible playbook
-    #       directory: ./ansible/
-    #       key: ${{secrets.SSH_PRIVATE_KEY}} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
-    #       inventory: aws_ec2.yml # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
+
 
       
