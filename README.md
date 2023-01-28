@@ -5,6 +5,7 @@
 * A simple Go server/microservice [docker-gs-ping](https://github.com/olliefr/docker-gs-ping/).
 * Includes a multi-stage Dockerfile, which actually is a good example of how to build Go binaries for production releases.
 * Use Terraform to deploy EC2 insatnce in AWS.
+* Monitoring Promeneus/Grafana.
 * Has a CI pipeline using GitHub Actions to run tests in independent containers.
 * Has a CD pipeline using GitHub Actions to publish to Docker Hub and AWS EC2 instance.
 
