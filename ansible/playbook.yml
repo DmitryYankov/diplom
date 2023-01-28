@@ -1,9 +1,9 @@
 ---
-- hosts: "{{ lookup('ansible.builtin.env', 'TF_VAR_VMNAME') }}"
+- hosts: diplom
   become: true
   vars:
-    container_name: "{{ lookup('ansible.builtin.env', 'CONTAINER_NAME') }}"     
-    container_image: "{{ lookup('ansible.builtin.env', 'CONTAINER_IMAGE') }}"   
+    container_name: "devops"     
+    container_image: "screen15/devops:latest"   
 
   tasks:
     - name: Install aptitude

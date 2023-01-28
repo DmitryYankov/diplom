@@ -4,10 +4,6 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
-env:
-  CONTAINER_NAME: devops
-  CONTAINER_IMAGE: "screen15/devops:latest"
-  TF_VAR_VMNAME: diplom
 
 jobs:
   golangci:
@@ -120,9 +116,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: terraform-apply
     steps:
-      # Checkout the repository to the GitHub Actions runner
+    - name: install python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'     
+          # Checkout the repository to the GitHub Actions runner
     - name: Create SSH key
       run: |
+          sudo apt -y install python3-boto3
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE_KEY" > ../private.key
           sudo chmod 600 ../private.key
@@ -132,10 +133,6 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
     - name: Checkout
       uses: actions/checkout@v3
-    # - name: install python
-    #   uses: actions/setup-python@v4
-    #   with:
-    #     python-version: '3.10' 
     - name: Play Ansible Playbook
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -158,5 +155,4 @@ jobs:
     #       key: ${{secrets.SSH_PRIVATE_KEY}} # the ssh private key for ansible to use to connect to the servers, stored as "ansible_ssh_private_key" in the GitHub secrets
     #       inventory: aws_ec2.yml # the ansible inventory to use, stored as "ansible_inventory" in the GitHub secrets
 
-      
       
