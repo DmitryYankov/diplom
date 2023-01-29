@@ -148,7 +148,7 @@ jobs:
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-inventory -ii ./ansible/aws_ec2.yml --list -vvv      
+        ansible-inventory -i ./ansible/aws_ec2.yml --list -vvv      
 
   # ansible-app:
   #   name: ansible deploy app
