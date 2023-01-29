@@ -160,6 +160,10 @@ jobs:
         inventory:  |
             [all]
             ec2-3-65-227-157.eu-central-1.compute.amazonaws.com  
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
   ansible-app:
     name: ansible deploy app
     runs-on: ubuntu-latest
