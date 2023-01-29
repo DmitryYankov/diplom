@@ -1,7 +1,6 @@
 ---
 hosts:
-  ubuntu:
-    18.159.45.185
+  18.159.45.185
  
 vars:
   ansible_user: ubuntu
