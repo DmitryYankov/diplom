@@ -144,7 +144,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         ansible --version
-        python3.8 --version
+        python3 --version
+        python3.10 --version
         pip3.8 list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-playbook ./ansible/monitoring/playbook.yml -i 18.193.111.222 --key-file /home/ubuntu/.ssh/private.key      
@@ -179,7 +180,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         ansible --version
-        python3.8 --version
+        python3 --version
+        python3.10 --version
         pip3.8 list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-playbook ./ansible/app/playbook.yml -i 18.193.111.222 --key-file /home/ubuntu/.ssh/private.key     
