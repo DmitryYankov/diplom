@@ -148,43 +148,43 @@ jobs:
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook ./ansible/monitoring/playbook.yml -i 18.193.111.222 --key-file /home/ubuntu/.ssh/private.key      
+        ansible-inventory -ii ./ansible/aws_ec2.yml --list -vvv      
 
-  ansible-app:
-    name: ansible deploy app
-    runs-on: ubuntu-latest
-    needs: ansible-monitoring
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3    
-    - name: install python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'  
-    - name: install boto3
-      run: |
-          pip install boto3 requests pyjwt   
-    - name: Create SSH key
-      run: |
-          sudo mkdir -p /home/ubuntu/.ssh/
-          sudo echo "$SSH_PRIVATE_KEY" > /home/ubuntu/.ssh/private.key
-          sudo chmod 600 /home/ubuntu/.ssh/private.key
-          sudo cat /home/ubuntu/.ssh/private.key
-      shell: bash
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
+  # ansible-app:
+  #   name: ansible deploy app
+  #   runs-on: ubuntu-latest
+  #   needs: ansible-monitoring
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v3    
+  #   - name: install python
+  #     uses: actions/setup-python@v4
+  #     with:
+  #       python-version: '3.10'  
+  #   - name: install boto3
+  #     run: |
+  #         pip install boto3 requests pyjwt   
+  #   - name: Create SSH key
+  #     run: |
+  #         sudo mkdir -p /home/ubuntu/.ssh/
+  #         sudo echo "$SSH_PRIVATE_KEY" > /home/ubuntu/.ssh/private.key
+  #         sudo chmod 600 /home/ubuntu/.ssh/private.key
+  #         sudo cat /home/ubuntu/.ssh/private.key
+  #     shell: bash
+  #     env:
+  #       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
 
-    - name: Play Ansible Playbook
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        ansible --version
-        python3 --version
-        python3.10 --version
-        pip list | grep boto
-        export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook ./ansible/app/playbook.yml -i 18.193.111.222 --key-file /home/ubuntu/.ssh/private.key     
+  #   - name: Play Ansible Playbook
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     run: |
+  #       ansible --version
+  #       python3 --version
+  #       python3.10 --version
+  #       pip list | grep boto
+  #       export ANSIBLE_HOST_KEY_CHECKING=False
+  #       ansible-playbook ./ansible/app/playbook.yml -i 18.193.111.222 --key-file /home/ubuntu/.ssh/private.key     
 
 
 
