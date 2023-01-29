@@ -141,7 +141,7 @@ jobs:
         python3 --version
         python3.10 --version
         pip list | grep boto
-        sudo cat /etc/ansible/ansible.cfg
+        sudo ls /home/runner/.ansible/
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-inventory -i ./ansible/aws_ec2.yml --list -vvv      
 
@@ -177,7 +177,7 @@ jobs:
         python3 --version
         python3.10 --version
         pip list | grep boto
-        sudo cat /etc/ansible/ansible.cfg
+        sudo ls /home/runner/.ansible/
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-inventory -i ./ansible/aws_ec2.yml --list -vvv      
 
