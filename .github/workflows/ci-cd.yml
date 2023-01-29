@@ -117,13 +117,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3    
-    - name: install python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'  
-    - name: install boto3
-      run: |
-          pip install boto3 requests pyjwt   
+    # - name: install python
+    #   uses: actions/setup-python@v4
+    #   with:
+    #     python-version: '3.10'  
+    # - name: install boto3
+    #   run: |
+    #       pip install boto3 requests pyjwt   
     - name: Create SSH key
       run: |
           sudo mkdir -p /home/ubuntu/.ssh/
@@ -135,6 +135,7 @@ jobs:
     - name: cat SSH
       run: |
           sudo cat /home/ubuntu/.ssh/private.key
+          sudo echo ${{ secrets.SSH_PRIVATE_KEY }} | sed 's/./& /g'
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
@@ -151,15 +152,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: ansible-monitoring
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3    
-    - name: install python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'  
-    - name: install boto3
-      run: |
-          pip install boto3 requests pyjwt   
+    # - name: Checkout
+    #   uses: actions/checkout@v3    
+    # - name: install python
+    #   uses: actions/setup-python@v4
+    #   with:
+    #     python-version: '3.10'  
+    # - name: install boto3
+    #   run: |
+    #       pip install boto3 requests pyjwt   
     - name: Create SSH key
       run: |
           sudo mkdir -p /home/ubuntu/.ssh/
