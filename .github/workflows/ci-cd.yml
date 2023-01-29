@@ -180,7 +180,10 @@ jobs:
         # Optional, SSH private key
         key: ${{secrets.SSH_PRIVATE_KEY}}
         # Optional, literal inventory file contents
-        inventory: ./ansible/inventory.yml 
+        inventory: |
+            [all]
+            ec2-3-65-227-157.eu-central-1.compute.amazonaws.com
+        
 
       # uses: actions/setup-python@v4
       # with:

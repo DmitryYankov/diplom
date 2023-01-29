@@ -1,7 +1,0 @@
----
-hosts:
-  52.29.26.241
- 
-vars:
-  ansible_user: ubuntu
-  # ansible_ssh_private_key_file: ~/itogdiplom/SSH_PRIVATE_KEY.pem
