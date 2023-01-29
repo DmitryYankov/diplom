@@ -160,8 +160,7 @@ jobs:
         inventory: |
             all:
             hosts:
-              3.65.227.157:
-                ansible_user: ubuntu              
+              ec2-3-65-227-157.eu-central-1.compute.amazonaws.com
   # ansible-app:
   #   name: ansible deploy app
   #   runs-on: ubuntu-latest
