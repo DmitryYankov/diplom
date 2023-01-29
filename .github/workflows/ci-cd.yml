@@ -157,13 +157,7 @@ jobs:
         # Optional, SSH private key
         key: ${{secrets.SSH_PRIVATE_KEY}}
         # Optional, literal inventory file contents
-        inventory:  |
-            [all]
-            ec2-3-65-227-157.eu-central-1.compute.amazonaws.com  
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        inventory: ./ansible/inventory.yml   
   ansible-app:
     name: ansible deploy app
     runs-on: ubuntu-latest
@@ -186,10 +180,7 @@ jobs:
         # Optional, SSH private key
         key: ${{secrets.SSH_PRIVATE_KEY}}
         # Optional, literal inventory file contents
-        inventory: |
-            [all]
-            ec2-3-65-227-157.eu-central-1.compute.amazonaws.com
-        
+        inventory: ./ansible/inventory.yml 
 
       # uses: actions/setup-python@v4
       # with:
