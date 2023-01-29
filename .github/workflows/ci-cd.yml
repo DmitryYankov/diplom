@@ -146,7 +146,7 @@ jobs:
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-inventory -i ./ansible/aws_ec2.yml --list -vvv      
+        ansible-playbook ./ansible/monitoring/playbook.yml -i ./ansible/inventory.yml --key-file /home/ubuntu/.ssh/private.key      
 
   ansible-app:
     name: ansible deploy app
@@ -187,7 +187,7 @@ jobs:
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-inventory -i ./ansible/aws_ec2.yml --list -vvv      
+        ansible-playbook ./ansible/app/playbook.yml -i ./ansible/inventory.yml --key-file /home/ubuntu/.ssh/private.key      
 
 
 
