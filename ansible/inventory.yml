@@ -1,5 +1,5 @@
 ---
 all:
  hosts:
-   3.65.227.157:
+   3.120.186.68:
     ansible_user: ubuntu
