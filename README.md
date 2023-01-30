@@ -19,3 +19,5 @@ If you want to use this project locally or use GitHub Actions you need to add so
 *  SSH_PRIVATE_KEY: SSH-KEY that you use to prove your identity when connecting to an Amazon EC2 instance.
 *  DOCKERHUB_USERNAME: Docker ID as value.
 *  DOCKERHUB_TOKEN: Docker Hub personal access tokens as alternatives to your password.
+
+Aslo check file ./tf/varables.tf and change vars if necessary, pay attention to this vars: ami and region.
