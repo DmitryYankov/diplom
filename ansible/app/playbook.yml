@@ -47,8 +47,8 @@
 
     - name: Login to Dockerhub
       community.docker.docker_login:
-        username: "{{ lookup('ansible.builtin.env',  ${{ secrets.DOCKERHUB_USERNAME }}) }}"
-        password: "{{ lookup('ansible.builtin.env',  ${{ secrets.DOCKERHUB_USERNAME }}) }}"
+        username: "{{ lookup('ansible.builtin.env',   'secrets.DOCKERHUB_USERNAME' ) }}"
+        password: "{{ lookup('ansible.builtin.env',   'secrets.DOCKERHUB_USERNAME' ) }}"
 
     - name: Pull app Docker image
       community.docker.docker_image:
