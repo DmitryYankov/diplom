@@ -109,7 +109,10 @@ jobs:
         cd ./tf/
         terraform init -input=false
         terraform apply -auto-approve
-        echo "public_ip=`terraform output -raw public_ip`" >> $VM_IP 
+        export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
+        echo $public_ip
+#        echo "public_ip=`terraform output -raw public_ip`" >> $VM_IP 
+
 
   ansible-monitoring:
     name: ansible deploy monitoring
@@ -145,7 +148,7 @@ jobs:
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${VM_IP},  --key-file /home/ubuntu/.ssh/private.key      
+        ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${public_ip},  --key-file /home/ubuntu/.ssh/private.key      
 
   # ansible-app:
   #   name: ansible deploy app
