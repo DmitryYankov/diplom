@@ -175,13 +175,13 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        echo ${{needs.terraform-apply.outputs.public_ip_monitoring}}
+        echo ${{needs.ansible-monitoring.outputs.public_ip_monitoring}}
         ansible --version
         python3 --version
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook ./ansible/app/playbook.yml -i ${{needs.terraform-apply.outputs.public_ip_app}}, --key-file /home/ubuntu/.ssh/private.key      
+        ansible-playbook ./ansible/app/playbook.yml -i ${{needs.ansible-monitoring.outputs.public_ip_app}}, --key-file /home/ubuntu/.ssh/private.key      
 
 
 
