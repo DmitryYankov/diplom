@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 env:
+  container_image: "${{ secrets.DOCKERHUB_USERNAME }}/devops:latest"
   DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 

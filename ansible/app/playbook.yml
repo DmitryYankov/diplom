@@ -3,7 +3,7 @@
   become: true
   vars:
     container_name: "devops"     
-    container_image: "screen15/devops:latest"
+    container_image: "{{ lookup('ansible.builtin.env', 'container_image') }}"
     DOCKER_USER: "{{ lookup('ansible.builtin.env', 'DOCKER_USER') }}"     
     DOCKER_PASSWORD: "{{ lookup('ansible.builtin.env', 'DOCKER_PASSWORD') }}"   
 
