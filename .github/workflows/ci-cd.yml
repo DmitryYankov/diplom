@@ -181,6 +181,7 @@ jobs:
 
 
 
+
         
        # ansible-playbook -u ubuntu ./ansible/app/playbook.yml -i ${{needs.ansible-monitoring.outputs.public_ip_app}}, --key-file /home/ubuntu/.ssh/private.key      
 
