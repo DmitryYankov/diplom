@@ -112,6 +112,8 @@ jobs:
         terraform apply -auto-approve
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
         echo public_ip=$public_ip >> "$GITHUB_OUTPUT"
+        echo $public_ip
+        echo $GITHUB_OUTPUT
     # outputs: 
     #   public_ip: ${{ steps.ip.outputs.public_ip }}  
 
@@ -123,14 +125,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3    
-    - name: install python
-      run: |
-          sudo apt-get -qy update
-          sudo apt install -qy python3 python3-pip software-properties-common ansible
-          pip install boto3
-    - name: install boto3
-      run: |
-          pip install boto3 requests pyjwt  
+    # - name: install python
+    #   run: |
+    #       sudo apt-get -qy update
+    #       sudo apt install -qy python3 python3-pip software-properties-common ansible
+    #       pip install boto3
+    # - name: install boto3
+    #   run: |
+    #       pip install boto3 requests pyjwt  
     - name: Create SSH key
       run: |
           sudo mkdir -p /home/ubuntu/.ssh/
@@ -141,21 +143,21 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
     - name: add ip to var
       run: |
-       echo "${{needs.terraform-apply.outputs.public_ip}}"
-       echo "${{needs.terraform-apply.outputs.output1}}"
+       echo "${{needs.terraform-apply.ip.outputs.public_ip}}"
+       echo "${{needs.terraform-apply.ip.outputs.output1}}"
        echo $PUBLIC_IP 
-    - name: Play Ansible Playbook
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        echo $PUBLIC_IP
-        ansible --version
-        python3 --version
-        python3.10 --version
-        pip list | grep boto
-        export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${PUBLIC_IP},  --key-file /home/ubuntu/.ssh/private.key      
+    # - name: Play Ansible Playbook
+    #   env:
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #   run: |
+    #     echo $PUBLIC_IP
+    #     ansible --version
+    #     python3 --version
+    #     python3.10 --version
+    #     pip list | grep boto
+    #     export ANSIBLE_HOST_KEY_CHECKING=False
+    #     ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${PUBLIC_IP},  --key-file /home/ubuntu/.ssh/private.key      
 
   # ansible-app:
   #   name: ansible deploy app
