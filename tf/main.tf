@@ -40,7 +40,13 @@ resource "aws_security_group" "web" {
     from_port = 3000
     to_port = 3000
     cidr_blocks = [ "0.0.0.0/0" ]
-  }  
+  } 
+  ingress {
+    protocol = "tcp"
+    from_port = 9090
+    to_port = 9090
+    cidr_blocks = [ "0.0.0.0/0" ]
+  }   
   ingress {
     description = "ssh"
     from_port   = 22
