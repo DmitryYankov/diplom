@@ -8,7 +8,6 @@ on:
 env:
   DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
   # golangci:
@@ -176,7 +175,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }} 
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       run: |
         ansible --version
