@@ -110,8 +110,6 @@ jobs:
         cd ./tf/
         terraform init -input=false
         terraform apply -auto-approve
-    - name: add ip to var
-      run: |   
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
         echo public_ip=$public_ip >> $GITHUB_OUTPUT
     # outputs: 
