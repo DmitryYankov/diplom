@@ -111,16 +111,11 @@ jobs:
         terraform init -input=false
         terraform apply -auto-approve
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
-        export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
-        echo $public_ip
-        echo "::set-output name=public_ip::${PUBLIC_IP}"
+        echo "public_ip=$public_ip" >> "$GITHUB_OUTPUT"
+        echo $public_ip"
     outputs: 
-      public_ip: ${{ steps.ip.outputs.public_ip }} 
- #       echo "public_ip=$public_ip" >> "$GITHUB_OUTPUT"
- #       echo $public_ip
- #       echo $GITHUB_OUTPUT
-    # outputs: 
-    #   public_ip: ${{ steps.ip.outputs.public_ip }}  
+      public_ip: ${{ steps.ip.outputs.public_ip }}
+
 
 
   ansible-monitoring:
@@ -143,13 +138,16 @@ jobs:
           sudo mkdir -p /home/ubuntu/.ssh/
           sudo echo "$SSH_PRIVATE_KEY" > /home/ubuntu/.ssh/private.key
           sudo chmod 600 /home/ubuntu/.ssh/private.key
+          echo "${{needs.terraform-apply.outputs.public_ip}}"
+          echo ${{ needs.terraform-apply.outputs.public_ip }} >> "$PUBLIC_IP"
+          echo $PUBLIC_IP
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
     - name: add ip to var
       run: |
-       echo "${{needs.terraform-apply.outputs.public_ip}}" = $PUBLIC_IP
        echo "${{needs.terraform-apply.outputs.public_ip}}"
+       echo "${{needs.terraform-apply.outputs.public_ip}}" = $PUBLIC_IP
        echo $PUBLIC_IP 
       #  echo "${{needs.terraform-apply.ip.outputs.output1}}"
       #  echo "${{needs.terraform-apply.outputs.public_ip}}"
