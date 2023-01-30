@@ -6,6 +6,7 @@
     container_image: "screen15/devops:latest"
     DOCKERHUB_USERNAME: "{{ lookup('ansible.builtin.env', 'DOCKERHUB_USERNAME') }}"     
     DOCKERHUB_TOKEN: "{{ lookup('ansible.builtin.env', 'DOCKERHUB_TOKEN') }}"   
+    DOCKERHUB_PASSWORD: "{{ lookup('ansible.builtin.env', 'DOCKERHUB_PASSWORD') }}"   
 
   tasks:
     - name: Install aptitude
@@ -50,7 +51,7 @@
     - name: Login to Dockerhub
       community.docker.docker_login:
         username: "{{ DOCKERHUB_USERNAME }}"
-        password: "{{ DOCKERHUB_TOKEN }}"
+        password: "{{ DOCKERHUB_PASSWORD }}"
 
     - name: Pull app Docker image
       community.docker.docker_image:
