@@ -16,7 +16,7 @@ resource "aws_instance" "diplom" {
   instance_type = var.instance_type
   associate_public_ip_address = true
   key_name      = var.SSH_PRIVATE_KEY
-  vpc_security_group_ids = [resource.aws_security_group.web1.id]  
+  vpc_security_group_ids = [resource.aws_security_group.web.id]  
 
   tags =  {
     Name = var.vmname
@@ -26,8 +26,8 @@ resource "aws_instance" "diplom" {
   }
 
 ### Create security group
-resource "aws_security_group" "web1" {
-  name        = "web1"
+resource "aws_security_group" "web" {
+  name        = "web"
   description = "web"
   ingress {
     protocol = "tcp"
