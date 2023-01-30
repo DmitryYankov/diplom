@@ -110,8 +110,10 @@ jobs:
         cd ./tf/
         terraform init -input=false
         terraform apply -auto-approve
+    - name: add ip to var
+      run: |   
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
-        echo $public_ip >> $GITHUB_OUTPUT
+        echo public_ip=$public_ip >> $GITHUB_OUTPUT
     # outputs: 
     #   public_ip: ${{ steps.ip.outputs.public_ip }}  
 
@@ -139,21 +141,20 @@ jobs:
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
-    - name: add ip 
+    - name: add ip to var
       run: |
-       echo ${{needs.job1.outputs.output1}} >> $PUBLIC_IP
+       echo ${{needs.terraform-apply.outputs.output1}} >> $PUBLIC_IP
        echo $PUBLIC_IP 
     - name: Play Ansible Playbook
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        echo "$PUBLIC_IP"
+        echo $PUBLIC_IP
         ansible --version
         python3 --version
         python3.10 --version
         pip list | grep boto
-        echo $PUBLIC_IP
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${PUBLIC_IP},  --key-file /home/ubuntu/.ssh/private.key      
 
