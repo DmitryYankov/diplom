@@ -3,7 +3,9 @@
   become: true
   vars:
     container_name: "devops"     
-    container_image: "screen15/devops:latest"   
+    container_image: "screen15/devops:latest"
+    DOCKERHUB_USERNAME: "{{ lookup('ansible.builtin.env', 'DOCKERHUB_USERNAME') }}"     
+    DOCKERHUB_TOKEN: "{{ lookup('ansible.builtin.env', 'DOCKERHUB_TOKEN') }}"   
 
   tasks:
     - name: Install aptitude
