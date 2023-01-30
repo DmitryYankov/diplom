@@ -112,8 +112,8 @@ jobs:
         terraform apply -auto-approve
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
         echo $public_ip >> $GITHUB_OUTPUT
-    outputs: 
-      public_ip: ${{ steps.ip.outputs.public_ip }}  
+    # outputs: 
+    #   public_ip: ${{ steps.ip.outputs.public_ip }}  
 
 
   ansible-monitoring:
@@ -136,15 +136,17 @@ jobs:
           sudo mkdir -p /home/ubuntu/.ssh/
           sudo echo "$SSH_PRIVATE_KEY" > /home/ubuntu/.ssh/private.key
           sudo chmod 600 /home/ubuntu/.ssh/private.key
-
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
+    - name: add ip 
+      run: |
+       echo ${{needs.job1.outputs.output1}} >> $PUBLIC_IP
+       echo $PUBLIC_IP 
     - name: Play Ansible Playbook
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        PUBLIC_IP: ${{ needs.terraform-apply.outputs.public_ip }}
       run: |
         echo "$PUBLIC_IP"
         ansible --version
