@@ -93,7 +93,8 @@ jobs:
     defaults:
       run:
         shell: bash
-
+    outputs: 
+      public_ip: ${{ steps.ip.outputs.public_ip }}
     steps:
       # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -112,9 +113,8 @@ jobs:
         terraform apply -auto-approve
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
         echo "public_ip=$public_ip" >> "$GITHUB_OUTPUT"
-        echo $public_ip"
-    outputs: 
-      public_ip: ${{ steps.ip.outputs.public_ip }}
+        echo $public_ip
+
 
 
 
