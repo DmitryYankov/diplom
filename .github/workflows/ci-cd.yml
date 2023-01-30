@@ -178,6 +178,10 @@ jobs:
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
         ansible-playbook -u ubuntu ./ansible/app/playbook.yml -i 3.70.176.86, --key-file /home/ubuntu/.ssh/private.key
+      with:
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}        
+        
 
 
         
