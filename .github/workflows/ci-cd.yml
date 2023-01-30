@@ -111,7 +111,7 @@ jobs:
         terraform init -input=false
         terraform apply -auto-approve
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
-        echo public_ip=$public_ip >> "$GITHUB_OUTPUT"
+        echo "public_ip=$public_ip" >> "$GITHUB_OUTPUT"
         echo $public_ip
         echo $GITHUB_OUTPUT
     # outputs: 
