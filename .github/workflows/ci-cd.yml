@@ -111,7 +111,7 @@ jobs:
         terraform init -input=false
         terraform apply -auto-approve
         export $(terraform output | sed 's/\s*=\s*/=/g' | xargs)
-        echo public_ip=$public_ip >> $GITHUB_OUTPUT
+        echo public_ip=$public_ip >> "$GITHUB_OUTPUT"
     # outputs: 
     #   public_ip: ${{ steps.ip.outputs.public_ip }}  
 
@@ -141,7 +141,7 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
     - name: add ip to var
       run: |
-       echo ${{needs.terraform-apply.outputs.output1}} >> $PUBLIC_IP
+       echo ${{needs.terraform-apply.outputs.output1}} >> "$PUBLIC_IP"
        echo $PUBLIC_IP 
     - name: Play Ansible Playbook
       env:
