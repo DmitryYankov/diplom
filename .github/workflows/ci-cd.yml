@@ -100,8 +100,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-      # On push to "master", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       id: ip
       env:
@@ -123,24 +121,23 @@ jobs:
     runs-on: ubuntu-latest
     needs: terraform-apply
     steps:
+      # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3    
-    # - name: install python
-    #   run: |
-    #       sudo apt-get -qy update
-    #       sudo apt install -qy python3 python3-pip software-properties-common ansible
-    #       pip install boto3
-    # - name: install boto3
-    #   run: |
-    #       pip install boto3 requests pyjwt  
+    - name: install python
+      run: |
+          sudo apt-get -qy update
+          sudo apt install -qy python3 python3-pip software-properties-common ansible
+          pip install boto3
+    - name: install boto3
+      run: |
+          pip install boto3 requests pyjwt  
     - name: Create SSH key
       run: |
           sudo mkdir -p /home/ubuntu/.ssh/
           sudo echo "$SSH_PRIVATE_KEY" > /home/ubuntu/.ssh/private.key
           sudo chmod 600 /home/ubuntu/.ssh/private.key
-          echo "${{needs.terraform-apply.outputs.public_ip}}"
-          echo ${{ needs.terraform-apply.outputs.public_ip }} >> "$PUBLIC_IP"
-          echo $PUBLIC_IP
+
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
@@ -149,22 +146,20 @@ jobs:
        echo "${{needs.terraform-apply.outputs.public_ip}}"
        echo "${{needs.terraform-apply.outputs.public_ip}}" = $PUBLIC_IP
        echo $PUBLIC_IP 
-      #  echo "${{needs.terraform-apply.ip.outputs.output1}}"
-      #  echo "${{needs.terraform-apply.outputs.public_ip}}"
-      #  echo "${{needs.terraform-apply.outputs.output1}}"
+
        
-    # - name: Play Ansible Playbook
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #   run: |
-    #     echo $PUBLIC_IP
-    #     ansible --version
-    #     python3 --version
-    #     python3.10 --version
-    #     pip list | grep boto
-    #     export ANSIBLE_HOST_KEY_CHECKING=False
-    #     ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${PUBLIC_IP},  --key-file /home/ubuntu/.ssh/private.key      
+    - name: Play Ansible Playbook
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        echo $PUBLIC_IP
+        ansible --version
+        python3 --version
+        python3.10 --version
+        pip list | grep boto
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${PUBLIC_IP},  --key-file /home/ubuntu/.ssh/private.key      
 
   # ansible-app:
   #   name: ansible deploy app
