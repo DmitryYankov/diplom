@@ -130,6 +130,9 @@ jobs:
           sudo mkdir -p /home/ubuntu/.ssh/
           sudo echo "$SSH_PRIVATE_KEY" > /home/ubuntu/.ssh/private.key
           sudo chmod 600 /home/ubuntu/.ssh/private.key
+          export VM_IP="3.65.227.157"
+          echo "::set-env name=VM_IP::$VM_IP"
+          echo $VM_IP
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
@@ -143,7 +146,7 @@ jobs:
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook ./ansible/monitoring/playbook.yml -i ./ansible/inventory.yml --key-file /home/ubuntu/.ssh/private.key      
+        ansible-playbook ./ansible/monitoring/playbook.yml -i ${VM_IP},  --key-file /home/ubuntu/.ssh/private.key      
 
   ansible-app:
     name: ansible deploy app
