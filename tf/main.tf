@@ -29,6 +29,12 @@ resource "aws_instance" "diplom" {
 resource "aws_security_group" "web" {
   name        = "web"
   description = "web"
+  ingress {
+    protocol = "tcp"
+    from_port = 8081
+    to_port = 8081
+    cidr_blocks = [ "0.0.0.0/0" ]
+  }
   
   ingress {
     description = "ssh"
