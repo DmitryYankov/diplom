@@ -109,7 +109,7 @@ jobs:
         cd ./tf/
         terraform init -input=false
         terraform apply -auto-approve
-        echo "public_ip=`terraform output -raw aws_instance.diplom.public_ip`" >> $VM_IP 
+        echo "public_ip=`terraform output -raw public_ip`" >> $VM_IP 
 
   ansible-monitoring:
     name: ansible deploy monitoring
