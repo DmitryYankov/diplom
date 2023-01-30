@@ -145,6 +145,8 @@ jobs:
       run: |
        echo "${{needs.terraform-apply.ip.outputs.public_ip}}"
        echo "${{needs.terraform-apply.ip.outputs.output1}}"
+       echo "${{needs.terraform-apply.outputs.public_ip}}"
+       echo "${{needs.terraform-apply.outputs.output1}}"
        echo $PUBLIC_IP 
     # - name: Play Ansible Playbook
     #   env:
