@@ -144,9 +144,8 @@ jobs:
     - name: add ip to var
       run: |
        echo "${{needs.terraform-apply.outputs.public_ip}}"
-       echo "${{needs.terraform-apply.outputs.public_ip}}" = $PUBLIC_IP
+       echo "${{needs.terraform-apply.outputs.public_ip}}" >> "$PUBLIC_IP"
        echo $PUBLIC_IP 
-
        
     - name: Play Ansible Playbook
       env:
@@ -159,7 +158,7 @@ jobs:
         python3.10 --version
         pip list | grep boto
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${PUBLIC_IP},  --key-file /home/ubuntu/.ssh/private.key      
+        ansible-playbook -u ubuntu ./ansible/monitoring/playbook.yml -i ${{needs.terraform-apply.outputs.public_ip}},  --key-file /home/ubuntu/.ssh/private.key      
 
   # ansible-app:
   #   name: ansible deploy app
@@ -167,6 +166,7 @@ jobs:
   #   needs: ansible-monitoring
   #   steps:
   #   - name: Checkout
+  #  #  Checkout the repository to the GitHub Actions runner
   #     uses: actions/checkout@v3    
   #   - name: install python
   #     run: |
