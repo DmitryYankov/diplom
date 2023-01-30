@@ -141,11 +141,11 @@ jobs:
       shell: bash
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} 
-    - name: add ip to var
-      run: |
-       echo "${{needs.terraform-apply.outputs.public_ip}}"
-       echo "${{needs.terraform-apply.outputs.public_ip}}" >> "$PUBLIC_IP"
-       echo $PUBLIC_IP 
+    # - name: add ip to var
+    #   run: |
+    #    echo "${{needs.terraform-apply.outputs.public_ip}}"
+    #    echo "${{needs.terraform-apply.outputs.public_ip}}" >> "$PUBLIC_IP"
+    #    echo $PUBLIC_IP 
        
     - name: Play Ansible Playbook
       env:
