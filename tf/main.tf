@@ -16,7 +16,7 @@ resource "aws_instance" "diplom" {
   instance_type = var.instance_type
   associate_public_ip_address = true
   key_name      = var.SSH_PRIVATE_KEY
-  vpc_security_group_ids = [resource.aws_security_group.web.id]  
+  vpc_security_group_ids = [resource.aws_security_group.web1.id]  
 
   tags =  {
     Name = var.vmname
@@ -26,8 +26,8 @@ resource "aws_instance" "diplom" {
   }
 
 ### Create security group
-resource "aws_security_group" "web" {
-  name        = "web"
+resource "aws_security_group" "web1" {
+  name        = "web1"
   description = "web"
   ingress {
     protocol = "tcp"
@@ -41,12 +41,6 @@ resource "aws_security_group" "web" {
     to_port = 3000
     cidr_blocks = [ "0.0.0.0/0" ]
   } 
-  ingress {
-    protocol = "tcp"
-    from_port = 9090
-    to_port = 9090
-    cidr_blocks = [ "0.0.0.0/0" ]
-  }   
   ingress {
     description = "ssh"
     from_port   = 22
