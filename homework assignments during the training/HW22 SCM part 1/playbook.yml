@@ -1,0 +1,48 @@
+---
+
+  #ubuntu
+- name: Install wget, htop, nginx ubuntu
+  hosts: all
+  become: True
+  tasks:
+      #install nginx ubuntu
+  - name: install nginx ubuntu
+    apt: name=nginx state=latest update_cache=yes
+    when: ansible_os_family == "Debian"
+      #Start and enable on boot
+  - name: restart nginx ubuntu
+    service: name=nginx state=started enabled=yes
+    when: ansible_os_family == "Debian"
+
+      #install wget ubuntu
+  - name: Install wget package (Debian based)
+    action: apt pkg='wget' state=latest
+    when: ansible_os_family == "Debian"
+        
+    #install htop ubuntu
+  - name: install htop package ubuntu
+    action: apt name=htop state=latest update_cache=yes
+    when: ansible_os_family == "Debian"
+        
+    #centos
+    #install nginx centos
+  - name: install nginx centos
+    yum: name=nginx state=latest update_cache=yes
+    when: ansible_os_family == "RedHat"
+      #Start and enable on boot
+  - name: restart nginx centos
+    service: name=nginx state=started enabled=yes
+    when: ansible_os_family == "RedHat"
+      #install wget centos
+  - name: Install wget package (RedHat based)
+    action: yum name='wget' state=latest
+    when: ansible_os_family == "RedHat"
+
+      #install htop centos
+  - name: install repo htop centos
+    action: yum name=epel-release state=latest update_cache=yes  
+    when: ansible_os_family == "RedHat"
+
+  - name: install htop package centos
+    action: yum name=htop state=latest update_cache=yes 
+    when: ansible_os_family == "RedHat"

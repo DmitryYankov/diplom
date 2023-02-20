@@ -1,0 +1,9 @@
+# Homework
+## Pass test
+https://proghub.ru/t/bash-for-beginner
+
+# Useful links
+https://habr.com/ru/company/ruvds/blog/445270/
+https://habr.com/ru/company/ruvds/blog/325522/
+https://acloudguru.com/blog/engineering/conditions-in-bash-scripting-if-statements
+https://wiki.bash-hackers.org/

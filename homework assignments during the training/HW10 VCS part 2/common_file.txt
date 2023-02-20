@@ -1,0 +1,6 @@
+
+common file B
+common file A
+combine files l10A and l10B and resolve conflict
+
+

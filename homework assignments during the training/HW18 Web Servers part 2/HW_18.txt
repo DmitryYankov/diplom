@@ -1,0 +1,8 @@
+# Homework
+
+1. Nginx VM with nginx installed as a service (starting on boot)
+3. Create /opt/pictures folder and put 4-5 pictures there
+4. Configure Nginx to:
+	- / path - some backend server (proxy_pass any site)
+	- /static - view folder with pictures directly
+	- /public/index.html - open html file with images links using <img></img> and <href></href> HTML tags.

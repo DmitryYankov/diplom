@@ -1,0 +1,5 @@
+Create a table in GitHub markdown based on OSI (level – protocols examples - unit).
+Create a markdown document describing difference of the IP package in TCP and UDP L4 protocols.
+Install OpenVPN server to one VM
+Configure client on the second VM and connect it to the server
+Configure the server to provide Internet access to the Clients via this server only

@@ -1,0 +1,83 @@
+---
+# tasks file for lesson24
+  - block: #redhat
+    - name: Update packages ubuntu
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+      notify: reboot
+    - name: Create group ubuntu
+      group:
+        name: "{{ group }}"
+        state: present
+    - name: Create Users bob ubuntu
+      user:
+        name: "{{ user1 }}"
+        state: present
+        group: "{{ group }}"
+    - name: Create Users root ubuntu
+      user:
+        name: "{{ user2 }}"
+        state: present
+        group: "{{ group }}"
+    - name: Creates directory /opt/bob ubuntu
+      file:
+        path: "{{ path1 }}"
+        state: directory
+        owner: "{{ user1 }}"
+        group: "{{ group }}"
+        mode: "{{ permissions }}"
+    - name: Creates directory /opt/students ubuntu
+      file:
+        path: "{{ path2 }}"
+        state: directory
+        owner: "{{ user2 }}"
+        group: "{{ group }}"
+        mode: "{{ permissions }}"
+    - name: user bob as a root 
+      community.general.sudoers:
+        name: user bob as a root 
+        state: present
+        user: "{{ user1 }}" 
+        commands: ALL  
+    when: ansible_os_family == "Debian"     
+  - block: #centos
+    - name: Update packages centos
+      yum: name=* state=latest
+      notify: reboot
+    - name: Create group centos
+      group:
+        name: "{{ group }}"
+        state: present
+    - name: Create Users bob centos
+      user:
+        name: "{{ user1 }}"
+        state: present
+        group: "{{ group }}"
+    - name: Create Users root centos
+      user:
+        name: "{{ user2 }}"
+        state: present
+        group: "{{ group }}"
+    - name: Creates directory /opt/bob centos
+      file:
+        path: "{{ path1 }}"
+        state: directory
+        owner: "{{ user1 }}"
+        group: "{{ group }}"
+        mode: "{{ permissions }}"
+    - name: Creates directory /opt/students centos
+      file:
+        path: "{{ path2 }}"
+        state: directory
+        owner: "{{ user2 }}"
+        group: "{{ group }}"
+        mode: "{{ permissions }}"
+    - name: user bob as a root centos
+      community.general.sudoers:
+        name: user bob as a root 
+        state: present
+        user: "{{ user1 }}" 
+        commands: ALL  
+    when: ansible_os_family == "RedHat"     

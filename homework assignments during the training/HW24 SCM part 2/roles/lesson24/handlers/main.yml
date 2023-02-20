@@ -1,0 +1,4 @@
+---
+# handlers file for lesson24
+- name: reboot
+  ansible.builtin.reboot:

@@ -1,0 +1,5 @@
+Configure access to your GitHub repo with SSH 
+Configure your user name and email for the repo (with git config command)
+Create branch from existing main
+Add few files, commit and push them to this branch
+

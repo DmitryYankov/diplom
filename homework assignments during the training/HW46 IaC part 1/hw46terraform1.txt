@@ -1,0 +1,21 @@
+With Terraform:
+
+
+1.	Create key pair
+2.	Create EC2 instance
+a.	AWS Linux 2 Ami (use data)
+b.	name: Name-Surname-Lesson№
+c.	attach previously created key pair (use output feature)
+3.	Tag all created resources (tag = “created by terraform”)
+4.	Outputs:
+a.	public/private IP and DNS
+b.	subnet_id
+c.	name of EC2
+5.	Put all parameters in variables file
+6.	Put the code in the appropriate files (main.tf, variables.tf, output.tf)
+
+
+После успешного выполнения задания обязательно все удаляем
+(terraform destroy)
+
+

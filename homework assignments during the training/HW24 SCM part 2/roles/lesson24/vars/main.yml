@@ -1,0 +1,8 @@
+---
+# vars file for lesson24
+user1: bob
+group: students
+user2: root
+path1: /opt/bob
+path2: /opt/students
+permissions: 0770

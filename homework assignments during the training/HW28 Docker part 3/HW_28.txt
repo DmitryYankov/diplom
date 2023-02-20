@@ -1,0 +1,10 @@
+ Docker-compose file:
+1.  Базу данных mysql с диском на host machine (database folder)	
+2.  Контейнер с Wordpress - php-fpm (non-root user)
+3.  Контейнер с nginx-reverse-proxy (конфиги для коннекта к WP и статика) - ТОЛЬКО NGINX (non-root user)
+4.  Все контейнеры должны быть запущены в отдельной сети - создать сеть с именем app_network
+5.  Конфиг Wordpress должен быть изменяем через переменные контейнера - https://developer.wordpress.org/apis/wp-config-php/ (например параметры WP_ENVIRONMENT_TYPE или WP_PLUGIN_DIR могут быть добавлены в переменные)
+
+
+
+https://docs.docker.com/develop/develop-images/dockerfile_best-practices/

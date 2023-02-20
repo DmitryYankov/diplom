@@ -1,0 +1,32 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  # Образ виртуальной машины с Vagrant Cloud
+  config.vm.box = "./ubuntutrusty64.box"
+  
+  # config vm
+  config.vm.define "nginxapache" do |nginxapache|
+    # Настройки виртуальной машины и выбор провайдера
+    nginxapache.vm.provider "virtualbox" do |vb|
+    vb.name = "nginxapache"
+  # Отключаем интерфейс
+    vb.gui = false
+  # Оперативная память
+    vb.memory = "2048"
+  # Количество процессоров
+    vb.cpus = 2
+  end
+    # Hostname
+    nginxapache.vm.hostname = "nginxapache"
+  # Команда для настройки сети
+    nginxapache.vm.network "public_network",  auto_config: true
+    nginxapache.vm.network "forwarded_port", guest: 8084, host: 8084, host_ip: "127.0.0.1"
+    nginxapache.vm.network "forwarded_port", guest: 8085, host: 8085, host_ip: "127.0.0.1"
+  
+    #Share folder
+    nginxapache.vm.synced_folder "./lesson17", "/lesson17"
+   
+    # Команда, которая выполнится после создания машины
+    nginxapache.vm.provision  "shell", path: "./1.sh"
+  end
+end

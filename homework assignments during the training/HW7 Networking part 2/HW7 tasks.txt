@@ -1,0 +1,4 @@
+Learn netmask calculation table
+Two VMs: client and server
+Deny incoming ICMP traffic with IPTables to server
+Allow incoming SSH connections to client from Server ONLY (all other – deny)

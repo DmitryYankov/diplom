@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  # Образ виртуальной машины с Vagrant Cloud
+  config.vm.box = "./ubuntutrusty64.box"
+  
+  # VM1
+  config.vm.define "rsyncserver" do |rsyncserver|
+    # Настройки виртуальной машины и выбор провайдера
+    rsyncserver.vm.provider "virtualbox" do |vb|
+    vb.name = "Rsync server"
+  # Отключаем интерфейс
+    vb.gui = false
+  # Оперативная память
+    vb.memory = "2048"
+  # Количество процессоров
+    vb.cpus = 2
+  end
+  # Hostname
+    rsyncserver.vm.hostname = "rsyncserver"
+  # Команда для настройки сети
+    rsyncserver.vm.network "public_network", ip: "192.168.100.95"
+  # Команда, которая выполнится после создания машины
+    rsyncserver.vm.provision "shell", path: "1.sh" 
+    
+  end
+
+  # VM2
+  config.vm.define "rsyncclient" do |rsyncclient|
+    # Настройки виртуальной машины и выбор провайдера
+    rsyncclient.vm.provider "virtualbox" do |vb|
+    vb.name = "Rsync client"
+  # Отключаем интерфейс
+    vb.gui = false
+  # Оперативная память
+    vb.memory = "2048"
+  # Количество процессоров
+    vb.cpus = 2
+  end
+  # Hostname
+    rsyncclient.vm.hostname = "rsyncclient"
+  # Команда для настройки сети
+    rsyncclient.vm.network "public_network", ip: "192.168.100.96"
+  # Команда, которая выполнится после создания машины
+  rsyncclient.vm.provision  "shell", path: "2.sh"
+  rsyncclient.vm.provision  "shell", path: "3.sh" 
+  rsyncclient.vm.provision  "shell", path: "4.sh" 
+
+  
+  end
+end

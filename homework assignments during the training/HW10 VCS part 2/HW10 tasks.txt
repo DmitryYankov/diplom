@@ -1,0 +1,8 @@
+Create a branch A from main which includes something meaningful - lesson topic. Example: lesson_10
+Create two more different branches B and C from branch A.
+Make at least three commits in each of them. These commits in each branch should:
+Change at least one common file
+Add two different (unique files)
+Add one file with the same name and different content
+Create a PRs and resolve conflicts: C => B, B => A, A => main
+All PRs excluding “A=> main” should have be merged using Squashing

@@ -1,0 +1,7 @@
+---
+- name: lesson24
+  hosts: all
+  become: true
+
+  roles:
+    - lesson24

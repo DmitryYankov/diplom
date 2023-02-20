@@ -1,0 +1,9 @@
+---
+hosts:
+  ubuntu:
+    192.168.100.114  
+  centos:
+    192.168.100.118  
+vars:
+  ansible_user: dmitryyankov
+  ansible_ssh_private_key_file: /home/dmitryyankov/.ssh/id_rsa

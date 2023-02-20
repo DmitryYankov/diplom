@@ -1,0 +1,6 @@
+date
+date
+Mon Jul 11 13:35:25 MSK 2022
+String text
+lesson12.sh lesson12.txt
+5

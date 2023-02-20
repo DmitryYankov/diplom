@@ -1,0 +1,5 @@
+Install Vagrant (if not installed)
+Choose provider for your OS ( Hyper-V, VMWare, AWS …) and configure it
+Write Vagrantfile to:
+Spin up Ubuntu box with access to internet
+Install java, screen and ntp packages

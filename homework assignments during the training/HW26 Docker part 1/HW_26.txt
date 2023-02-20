@@ -1,0 +1,27 @@
+1. Установить docker-ce (docker desktop)
+2. Завести аккаунт в Docker hub
+3. Создать приватную репу в Docker hub
+
+4. Написать 1-й Dockerfile 
+	- базовый образ alpine:latest
+	- Установка nginx
+	- Создание папки /opt/www
+	- Там файл index.html
+	- Создать конфиг nginx
+	- открыть порт для nignx
+	- запуск через CMD
+
+5. Написать 2-й Dockerfile
+	- базовый образ debian:11
+	- Установка nginx
+	- Создание папки /opt/www
+	- Там файл index.html
+	- Создать конфиг nginx
+	- открыть порт для nignx
+	- запуск через Entrypoint
+
+6. Сделать 3-й Dockerfile
+	- На базе nginx:latest
+	- Создание папки /opt/www
+	- Там файл index.html
+	- Создать конфиг nginx

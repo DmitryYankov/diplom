@@ -1,0 +1,9 @@
+HW 16
+
+finish archivation.sh script:
+
+#TODO: add second parameter for script to input the folder to backup
+#TODO: add variable LAUNCHER = manual \ cron, check who executed this script and write it to meta.txt
+#TODO: check for active cron and dont duplicate 
+#TODO: copying to remote
+#TODO: fix shellcheck issues

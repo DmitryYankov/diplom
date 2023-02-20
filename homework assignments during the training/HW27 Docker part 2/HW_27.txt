@@ -1,0 +1,18 @@
+
+1. Контейнер с postgresql (на базе postgresql образа)
+	- Создание DB, USER, PortMaping
+	- volume с базами данных
+2. Контрейнер с mysql  (на базе mysql образа)
+	- Создание DB, USER, PortMaping
+	- volume с базами данных
+3. Контейнер с debian:11
+	- Создать юзера
+	- создать в /opt директорию
+	- скопировать в директорию 2 файла (COPY . /)
+	- установить инструменты для коннекта к mysql и Postgres
+	- создать .dockerignore file и запретить ему копирование Dockerfile и какого-нибуль 3-го файла внутрь контейнера
+
+[опционально] сделать 1 и 2 контейнеры на базе centos\ubuntu образа (пример, пункт 4 - https://www.baeldung.com/ops/postgresql-docker-setup)
+
+Dockerfiles и вывод output для проверки. 
+Можно использовать официальные образы.

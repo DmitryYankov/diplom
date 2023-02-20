@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  # Образ виртуальной машины с Vagrant Cloud
+  config.vm.box = "./ubuntutrusty64.box"
+  # Настройки виртуальной машины и выбор провайдера
+  config.vm.provider "virtualbox" do |vb|
+  vb.name = "ubuntuvagrant"
+  # Отключаем интерфейс
+  vb.gui = false
+  # Оперативная память
+  vb.memory = "4096"
+  # Количество процессоров
+  vb.cpus = 2
+end
+  # Hostname
+  config.vm.hostname = "VagrantVMubuntu"
+  # Команда для настройки сети
+  config.vm.network "public_network"
+  # Команда, которая выполнится после создания машины
+  config.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+    echo "Installing Java"
+    apt-get install -y default-jdk
+    echo "Java  installation finished"
+    echo "Installing Screen"
+    apt-get install -y screen
+    echo "Screen  installation finished"
+    echo "Installing NTP"
+    apt-get install -y ntp
+    echo "NTP  installation finished"
+   SHELL
+end

@@ -1,0 +1,13 @@
+To do:
+Read about HTTP (methods, requests, responses)
+Install Apache and Nginx in one VM
+Remove default Apache and Nginx configurations
+Create /opt/nginx and /opt/apache
+Each folder should include test.txt (with some text) and test.html (with valid HTML code) files
+Apache should listen 8084 port
+Nginx should listen 8085 port
+Both should start upon VM start
+
+Content to send:
+Send Vagrantfile with all configuration made
+Demonstrate screenshots for each web-server for each txt and html pages.

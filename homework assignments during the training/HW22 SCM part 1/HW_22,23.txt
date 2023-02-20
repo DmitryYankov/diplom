@@ -1,0 +1,8 @@
+Установить Ansible 5.8.x (2.12.x core) на хостовую машину
+1 VM - Ubuntu 20
+1 VM - Centos 8
+Настроить подключение с хоста на машины по SSH с помощью ключа
+Проверить подключение Ansible хостов с помощью ansible all -m ping -i host1,host2,
+Установить wget, htop и nginx (и запускать) на оба сервера с помощью ansible-playbook
+
+Предоставить YAML\Inventory и скриншоты выполнения
